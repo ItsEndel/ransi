@@ -1,7 +1,55 @@
-use super::AnsiColor;
+//! `ansi_text` has a struct to let you build ansi texts quickly
+//! 
+//! * You can `use ransi::AnsiText` to import the struct
+//! 
+//! # Examples
+//! 
+//! ```
+//! let mut ansi = AnsiText::new();
+//! 
+//! let text1 = ansi
+//!     .bold()
+//!     .italic()
+//!     .underline()
+//!     .color(AnsiColor::RED, false, false)
+//!     .text("ERROR")
+//!     .reset()
+//!     .build();
+//! 
+//! let text2 = ansi
+//!     .color(AnsiColor::GREEN, false, false)
+//!     .text("GREEN ")
+//!     .color(AnsiColor::YELLOW, false, false)
+//!     .text("YELLOW ")
+//!     .color_rgb(255, 0, 0, false)
+//!     .text("GREAT RED")
+//!     .reset()
+//!     .build();
+//! ```
 
 
 
+mod ansi_color;
+
+
+
+pub use ansi_color::AnsiColor;
+
+
+
+/// Ansi Text Builder
+/// 
+/// # Examples
+/// 
+/// ```
+/// let mut ansi = AnsiText::new();
+/// 
+/// let text = ansi
+///     .color(AnsiColor::BLACK, true, false)
+///     .color(AnsiColor::GREEN, false, false)
+///     .text("Im Hacking Your Computer!")
+///     .build();
+/// ```
 pub struct AnsiText {
     text: String,
 
@@ -12,6 +60,7 @@ pub struct AnsiText {
 
 
 impl AnsiText {
+    /// Create a new `AnsiTextBuilder` instance
     pub fn new() -> AnsiText {
         AnsiText {
             text: String::from(""),
@@ -142,7 +191,7 @@ impl AnsiText {
 
 
 impl AnsiText {
-    pub fn out(&mut self) -> String {
+    pub fn build(&mut self) -> String {
         self.flush();
 
         let result = self.text.clone();

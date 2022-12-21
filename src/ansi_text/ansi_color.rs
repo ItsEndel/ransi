@@ -1,4 +1,10 @@
+//! `ansi_colors` has an Enum which contains windows cmd colors
+//! 
+//! * You can `use ransi::AnsiColor` to import the enum
 
+
+
+/// Color Enum
 pub enum AnsiColor {
     BLACK,
     RED,
